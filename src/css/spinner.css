@@ -1,0 +1,23 @@
+.spinner-wrapper {
+  display: block;
+  padding: 0 0 .5rem;
+  margin: .5rem 0;
+  text-align: center;
+  &.off {
+    display: none;
+  }
+}
+.spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  color: var(--indigo-9);
+  border: 2px solid;
+  border-color: currentColor currentColor transparent;
+  border-radius: 50%;
+  animation: spinner-border .7s linear infinite;
+}
+
+@keyframes spinner-border {
+  to { transform: rotate(360deg); }
+}

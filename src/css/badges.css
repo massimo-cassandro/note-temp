@@ -1,0 +1,12 @@
+.badge {
+  position: relative;
+  top: -1px;
+  display: inline-block;
+  padding: 0 8px;
+  font-size: .6rem;
+  color: var(--stone-10);
+  text-transform: uppercase;
+  /* background-color: var(--stone-4); */
+  border: .5px solid var(--stone-8);
+  border-radius: 2rem;
+}

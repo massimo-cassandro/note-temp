@@ -1,0 +1,41 @@
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.position-relative {
+  position: relative;
+}
+
+/* .mobile-hidden {
+  @media (--media-desktop-down) {
+    display: none;
+  }
+} */
+
+.w-100 {
+  width: 100%;
+}
+
+.mt-xxs {
+  margin-top: var(--spacing-xxs);
+}
+.mt {
+  margin-top: var(--spacing-base);
+}
+/* .mt-lg {
+  margin-top: var(--spacing-lg);
+} */
+.mt-xl {
+  margin-top: var(--spacing-xl);
+}
+/* @media (--media-desktop-up) {
+
+  .mt-dsk-lg {
+    margin-top: var(--spacing-lg);
+  }
+} */
+
+/* .grid-full-row {
+  grid-column: 1 / -1;
+} */
