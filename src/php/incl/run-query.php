@@ -3,11 +3,17 @@
 function runQuery() {
   global $db;
 
+  if($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("HTTP/1.1 500 Internal Server Error");
+    die('err-q1');
+  }
+
   $end = isset($_POST['l'])? $_POST['l'] : 10; // limit
   $start = isset($_POST['p'])? $_POST['p'] * $end : 0; // pagina
 
   $where = [];
   $join = [];
+
 
 
   // var_dump($_POST); echo '<br><br><br>';

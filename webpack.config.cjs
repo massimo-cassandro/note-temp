@@ -397,7 +397,7 @@ const config = {
             <link rel="apple-touch-icon" href="./apple-touch-icon.png">
             <link rel="manifest" href="./manifest.webmanifest">
             <meta name="robots" content="noindex, nofollow">
-            <title>Bloc-Note</title>
+            <title>Note</title>
           </head>
           <body>
             <div id="root"></div>

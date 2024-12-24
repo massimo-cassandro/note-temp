@@ -15,16 +15,12 @@ if ($isLocalEnv) {
 
 } else {
 
-  if($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header("HTTP/1.1 500 Internal Server Error");
-    die('err-1');
-  }
 
   // check same origin
   foreach (['HTTP_ORIGIN', 'HTTP_REFERER'] as $k) {
     if(!empty($_SERVER[$k]) && !preg_match("/^https?:\/\/${_SERVER['SERVER_NAME']}/", $_SERVER[$k])) {
       header("HTTP/1.1 500 Internal Server Error");
-      die('err-2');
+      die('err-i1');
     }
   }
 }

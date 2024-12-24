@@ -35,9 +35,9 @@ if(!empty($_GET['id'])) {
 
   } else {
     header("HTTP/1.1 404 Not Found");
-    echo 'err-5';
+    die('err-f1');
   }
 } else {
   header("HTTP/1.1 500 Internal Server Error");
-  echo 'err-6';
+  die('err-f2');
 }

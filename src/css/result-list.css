@@ -55,20 +55,35 @@
       margin: var(--spacing-xs) 0;
     }
 
+    .attachments-lnk {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: var(--spacing-xxs);
+      align-items: center;
+      justify-content: flex-start;
+
+      .icon {
+        flex-shrink: 0;
+        /* stylelint-disable-next-line max-nesting-depth, selector-max-compound-selectors */
+        svg {
+          width: 1.1em;
+          aspect-ratio: 1;
+          fill: currentColor;
+        }
+      }
+
+      .filesize {
+        font-size: var(--font-size-sm);
+      }
+
+    }
+
 
     img:not(.icon) {
       display: block;
       max-width: 100%;
       height: auto;
       margin: 1rem 0;
-    }
-    .icon {
-      position: relative;
-      top: 3px;
-      display: inline;
-      width: 1.1em;
-      aspect-ratio: 1;
-      margin-inline-end: 2px;
     }
   }
 

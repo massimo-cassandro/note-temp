@@ -4,7 +4,7 @@ import { marked } from 'node_modules/marked/lib/marked';
 import row_template from './row-template.html';
 import logo_mini from '../favicons-src/favicon-verde-small-src.svg';
 import { parse_file_size } from './parse-file-size';
-import iconaPdf from '../imgs/file-pdf.svg';
+import iconaPdf from '../imgs/file-pdf.svg?inline';
 /*
 [
   {
@@ -69,18 +69,21 @@ function create_row(item) {
   if (item.attachments.length) {
     item.attachments = '<ul class="attachments">' +
       item.attachments.map(a => {
-        let att, icon = '';
         if (a.mime.includes('image')) {
-          att = `<img src="${params.get_file_url}?id=${a.id}" alt="${a.caption ?? a.display_name ?? a.filename}" width="${a.width}" height="${a.height}" loading="lazy">`;
+          return `<li><img src="${params.get_file_url}?id=${a.id}" alt="${a.caption ?? a.display_name ?? a.filename}" width="${a.width}" height="${a.height}" loading="lazy"></li>`;
 
         } else {
+          let icon = '<span></span>';
           if (a.mime.includes('pdf')) {
-            icon = `<img src="${iconaPdf}" class="icon" alt="pdf" width="16" height="16" loading="lazy">`;
+            icon = `<span class="icon">${iconaPdf}</span>`;
           }
-          att = `${icon} <a href="${params.get_file_url}?id=${a.id}" title="${a.display_name ?? a.filename}" download="${a.display_name ?? a.filename}">${a.caption ?? a.display_name ?? a.filename}</a> <small>(${parse_file_size(a.size)})</small>`;
+          return '<li class="attachments-lnk">' +
+              icon +
+              `<a class="text-overflow" href="${params.get_file_url}?id=${a.id}" title="${a.id} / ${a.display_name ?? a.filename}" download="${a.display_name ?? a.filename}">${a.caption ?? a.display_name ?? a.filename}</a>` +
+              `<span class="filesize">(${parse_file_size(a.size)})</span>` +
+            '</li>';
         }
 
-        return `<li>${att}</li>`;
       }).join('') +
       '</ul>';
   } else {

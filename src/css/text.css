@@ -80,6 +80,11 @@ em, .italic {
 .text-nowrap {
   white-space: nowrap;
 }
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 /* .text-nowrap-dskt {
   @media (--media-desktop-up) {
