@@ -15,6 +15,9 @@ composer.lock
 .env.test.local
 .env.production.local
 
+build
+
+# dev
 _db-dev
 src/php/symlink.md
-build
+db/note.sqbpro

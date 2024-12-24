@@ -10,12 +10,11 @@ async function fetchData() {
   formData.set('p', params.pag);
   formData.set('l', params.query_limit);
 
-  params.search_params.q = params.search_input.value.trim() || null;
+  params.search_params.q = params.search_input.value.trim() || '';
 
-  Object.keys(params.search_params).filter(k => params.search_params[k] != null).forEach(k => {
+  Object.keys(params.search_params).filter(k => params.search_params[k] != null && params.search_params[k] !== '').forEach(k => {
     formData.set(k, params.search_params[k]);
   });
-
 
   try {
     const response = await fetch(params.api_url, {
@@ -46,16 +45,19 @@ function fetching_mode(active=true) {
   params.search_fset.disabled = active;
 }
 
-export function reset_search() {
+export function reset_search(fully=true) {
   window.scrollTo(0, 0);
   params.pag = 0;
-  params.search_params.q = null;
   params.result_wrapper.innerHTML = '';
-  params.search_input.value = '';
-  params.search_input.focus();
   stop_scroll_observer();
-  // fetching_mode(false);
-  getData();
+
+  if(fully) {
+    params.search_params.q = '';
+    params.search_input.value = '';
+    params.search_input.focus();
+    // fetching_mode(false);
+    getData();
+  }
 }
 
 export async function getData() {
@@ -63,9 +65,8 @@ export async function getData() {
   fetching_mode();
 
 
-  if(params.search_params.q != null && params.search_params.q !== params.search_input.value.trim()) {
-    params.result_wrapper.innerHTML = '';
-    stop_scroll_observer();
+  if((params.search_params.q?? '') !== params.search_input.value.trim()) {
+    reset_search(false);
   }
 
   const data = await fetchData();

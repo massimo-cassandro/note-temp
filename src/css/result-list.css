@@ -1,8 +1,12 @@
 .result-wrapper {
 
   details {
-    padding: var(--spacing-xxs);
+    padding: var(--spacing-xs);
     border-bottom: 1px solid light-dark(var(--gray-6), var(--gray-2));
+
+    @media (--md-n-above) {
+      padding: var(--spacing-xxs);
+    }
   }
 
   summary {
@@ -11,9 +15,10 @@
   }
 
   .content {
-    padding: 0 var(--spacing-xs) var(--spacing-xs);
+    padding: var(--spacing-xs);
     margin-top: var(--spacing-xxs);
-    background-color: var(--stone-2);
+    line-height: var(--font-lineheight-4);
+    background-color: light-dark(var(--stone-2), color-mix(in srgb, #fff 3%, transparent));
     border-radius: var(--radius-md);
   }
 
@@ -21,9 +26,14 @@
     display: flex;
     flex-flow: row nowrap;
     gap: var(--spacing-md);
-    /* align-content: flex-start; */ /* multiline container */
     align-items: flex-start;
     justify-content: space-between;
+    margin-block-start: var(--spacing-base);
+
+    > div {
+      font-size: var(--font-size-xs);
+      color: light-dark(var(--stone-8), var(--stone-1));
+    }
   }
 
   .tags {
@@ -34,12 +44,6 @@
     margin-bottom: var(--spacing-xs);
   }
 
-  .updated {
-    padding: var(--spacing-xxs) 0;
-    margin: var(--spacing-xs);
-    font-size: var(--font-size-xs);
-    color: var(--gray-6);
-  }
 
   .attachments{
     margin: var(--spacing-base) 0 0;

@@ -89,6 +89,8 @@ function runQuery() {
     $list[] = $row;
   }
 
+  // var_dump($list); exit;
+
 
   header("Content-Type: application/json; charset=utf-8");
   echo json_encode($list); //  JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK
