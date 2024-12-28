@@ -16,7 +16,7 @@
   --font-size-xs-fluid: clamp(.7rem, 1.5vw, .82rem);
   --font-size-sm: .8rem; /* 12.8px */
   /* --font-size-sm-md: .875rem; */ /* 14px */
-  --font-size-sm-fluid: clamp(.8rem, 2vw, .92rem);
+  --font-size-sm-fluid: clamp(.85rem, 10vw, .95rem);
   --font-size-lg-fluid: clamp(1rem, 12vw, 1.3rem);
   --font-size-lg: 1.3rem;
 

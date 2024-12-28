@@ -4,8 +4,6 @@
 node_modules
 bower_components
 vendor
-package-lock.json
-composer.lock
 
 .env
 .env.local
