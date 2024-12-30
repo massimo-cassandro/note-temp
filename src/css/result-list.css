@@ -12,6 +12,10 @@
   summary {
     font-size: var(--font-size-sm-fluid);
     font-weight: var(--font-weight-semibold);
+    .favourite {
+      margin-inline-end: .2rem;
+      color: var(--yellow-7);
+    }
   }
 
   .content {
@@ -64,12 +68,6 @@
 
       .icon {
         flex-shrink: 0;
-        /* stylelint-disable-next-line max-nesting-depth, selector-max-compound-selectors */
-        svg {
-          width: 1.1em;
-          aspect-ratio: 1;
-          fill: currentColor;
-        }
       }
 
       .filesize {

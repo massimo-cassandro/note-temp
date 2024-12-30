@@ -4,7 +4,8 @@ import { marked } from 'node_modules/marked/lib/marked';
 import row_template from './row-template.html';
 import logo_mini from '../favicons-src/favicon-verde-small-src.svg';
 import { parse_file_size } from './parse-file-size';
-import iconaPdf from '../imgs/file-pdf.svg?inline';
+import pdfIcon from '../imgs/file-pdf.svg?inline';
+import starIcon from '../imgs/star-fill.svg?inline';
 /*
 [
   {
@@ -65,6 +66,8 @@ function create_row(item) {
     day: 'numeric'
   });
 
+  item.favourite = item.favourite ? `<span class="favourite icon">${starIcon}</span>` : '';
+
   item.attachments = JSON.parse(item.attachments ?? '[]');
   if (item.attachments.length) {
     item.attachments = '<ul class="attachments">' +
@@ -75,7 +78,7 @@ function create_row(item) {
         } else {
           let icon = '<span></span>';
           if (a.mime.includes('pdf')) {
-            icon = `<span class="icon">${iconaPdf}</span>`;
+            icon = `<span class="icon">${pdfIcon}</span>`;
           }
           return '<li class="attachments-lnk">' +
               icon +

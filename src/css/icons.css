@@ -1,0 +1,10 @@
+.icon {
+  svg {
+    position: relative;
+    top: 3px;
+    display: inline-block;
+    width: 1.1em;
+    aspect-ratio: 1;
+    fill: currentColor;
+  }
+}

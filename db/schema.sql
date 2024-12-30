@@ -1,9 +1,17 @@
+--
+-- File generato con SQLiteStudio v3.4.12 su lun dic 30 16:48:48 2024
+--
+-- Codifica del testo utilizzata: UTF-8
+--
+PRAGMA foreign_keys = off;
+
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS "attachments";
+-- Tabella: attachments
+DROP TABLE IF EXISTS attachments;
 
 CREATE TABLE
-  attachments (
+  IF NOT EXISTS attachments (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     note_id INTEGER REFERENCES notes (id) ON DELETE CASCADE NOT NULL,
     filename TEXT NOT NULL,
@@ -15,54 +23,51 @@ CREATE TABLE
     size NUMERIC
   );
 
-DROP TABLE IF EXISTS "notes";
+-- Tabella: notes
+DROP TABLE IF EXISTS notes;
 
 CREATE TABLE
-  notes (
+  IF NOT EXISTS notes (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     title VARCHAR(255) NOT NULL,
     content TEXT,
+    favourite BOOLEAN NOT NULL DEFAULT (0),
     archived BOOLEAN NOT NULL DEFAULT (0),
-    trash TEXT DEFAULT (0),
+    trash BOOLEAN DEFAULT (0) NOT NULL,
     created TEXT DEFAULT (CURRENT_TIMESTAMP) NOT NULL,
     updated TEXT DEFAULT (CURRENT_TIMESTAMP) NOT NULL
   );
 
-DROP TABLE IF EXISTS "notes_tags";
+-- Tabella: notes_tags
+DROP TABLE IF EXISTS notes_tags;
 
 CREATE TABLE
-  notes_tags (
+  IF NOT EXISTS notes_tags (
     note_id NUMERIC REFERENCES notes (id) ON DELETE CASCADE,
     tag_id NUMERIC REFERENCES tags (id) ON DELETE CASCADE,
     PRIMARY KEY (note_id, tag_id)
   );
 
-DROP TABLE IF EXISTS "tags";
+-- Tabella: tags
+DROP TABLE IF EXISTS tags;
 
 CREATE TABLE
-  tags (
+  IF NOT EXISTS tags (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     tag TEXT NOT NULL
   );
 
-DROP INDEX IF EXISTS "note_idx";
-
-CREATE INDEX note_idx ON attachments (note_id ASC);
-
-DROP INDEX IF EXISTS "title_idx";
-
-CREATE INDEX title_idx ON notes (title ASC);
-
-DROP TRIGGER IF EXISTS "onupdate";
-
-CREATE TRIGGER onupdate AFTER
-UPDATE ON notes FOR EACH ROW WHEN NEW.updated < OLD.updated BEGIN
+-- triggers
+CREATE TRIGGER update_timestamp AFTER
+UPDATE ON notes FOR EACH ROW WHEN OLD.updated != DATETIME ('NOW', 'localtime') BEGIN
 UPDATE notes
 SET
-  updated = CURRENT_TIMESTAMP
+  updated = DATETIME ('now', 'localtime')
 WHERE
-  id = NEW.id;
+  id = new.id;
 
 END;
 
-COMMIT;
+COMMIT TRANSACTION;
+
+PRAGMA foreign_keys = on;

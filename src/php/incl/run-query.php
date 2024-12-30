@@ -41,7 +41,7 @@ function runQuery() {
   $where[] = 'notes.archived = 0 AND notes.trash = 0';
 
   $q = "select distinct
-    notes.id, notes.title, notes.updated, notes.content, notes.archived, notes.trash,
+    notes.id, notes.title, notes.updated, notes.content, notes.favourite, notes.archived, notes.trash,
 
     (SELECT json_group_array(json_object('id', tags.id, 'tag', tags.tag))
       FROM (tags, notes_tags as nt)
@@ -66,7 +66,7 @@ function runQuery() {
 
     " . (count($where)? " WHERE " . join(' AND ', $where) . " " : '') . "
 
-    ORDER BY notes.title COLLATE NOACCENTS COLLATE NOCASE ASC
+    ORDER BY notes.favourite DESC, notes.title COLLATE NOACCENTS COLLATE NOCASE ASC
     LIMIT {$start}, {$end}
   ";
 
