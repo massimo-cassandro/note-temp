@@ -23,12 +23,12 @@ function runQuery() {
       or notes.content LIKE :q COLLATE NOACCENTS COLLATE NOCASE
       or tags.tag LIKE :q COLLATE NOACCENTS COLLATE NOCASE";
 
-    $join[] = "INNER JOIN notes_tags as nt ON ( nt.note_id  = notes.id)";
-    $join[] = "INNER JOIN tags ON ( tags.id = nt.tag_id )";
+    $join[] = "LEFT JOIN notes_tags as nt ON ( nt.note_id  = notes.id)";
+    $join[] = "LEFT JOIN tags ON ( tags.id = nt.tag_id )";
   }
 
   // if(!empty($_POST['tagId'])) {
-  //   $join[] = "INNER JOIN tags as t ON ( nt.note_id = notes.id AND nt.tag_id in (".
+  //   $join[] = "LEFT JOIN tags as t ON ( nt.note_id = notes.id AND nt.tag_id in (".
   //     implode(',', $_POST['tagId']) . ") )";
   // }
 

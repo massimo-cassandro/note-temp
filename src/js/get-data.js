@@ -50,6 +50,7 @@ export function reset_search(fully=true) {
   params.pag = 0;
   params.result_wrapper.innerHTML = '';
   stop_scroll_observer();
+  document.querySelector('.bookend')?.remove();
 
   if(fully) {
     params.search_params.q = '';
