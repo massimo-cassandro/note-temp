@@ -1,9 +1,9 @@
 <?php
 
 function runQuery() {
-  global $db;
+  global $db, $isLocalEnv;
 
-  if($_SERVER['REQUEST_METHOD'] !== 'POST') {
+  if(!$isLocalEnv and $_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("HTTP/1.1 500 Internal Server Error");
     die('err-q1');
   }
@@ -19,9 +19,9 @@ function runQuery() {
   // var_dump($_POST); echo '<br><br><br>';
 
   if(!empty($_POST['q'])) {
-    $where[] = "notes.title LIKE :q COLLATE NOACCENTS COLLATE NOCASE
+    $where[] = "(notes.title LIKE :q COLLATE NOACCENTS COLLATE NOCASE
       or notes.content LIKE :q COLLATE NOACCENTS COLLATE NOCASE
-      or tags.tag LIKE :q COLLATE NOACCENTS COLLATE NOCASE";
+      or tags.tag LIKE :q COLLATE NOACCENTS COLLATE NOCASE)";
 
     $join[] = "LEFT JOIN notes_tags as nt ON ( nt.note_id  = notes.id)";
     $join[] = "LEFT JOIN tags ON ( tags.id = nt.tag_id )";
